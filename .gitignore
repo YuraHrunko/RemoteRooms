@@ -1,0 +1,18 @@
+# Build output and local tools
+app/bin/
+app/obj/
+app/*.pdb
+app/*.lib
+publish/
+installer/*.exe
+*.log
+
+# Local address books, credentials, and temporary files
+address-book.json
+*.tmp
+.vs/
+.idea/
+
+# Python
+__pycache__/
+*.pyc

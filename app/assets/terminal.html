@@ -1,0 +1,11 @@
+<!doctype html>
+<html lang="uk"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="xterm.css"><style>html,body,#terminal{width:100%;height:100%;margin:0;background:#101827;overflow:hidden}#terminal{padding:12px;box-sizing:border-box}</style></head>
+<body><div id="terminal"></div><script src="xterm.js"></script><script src="addon-fit.js"></script><script>
+const term=new Terminal({cursorBlink:true,fontFamily:'Cascadia Mono,Consolas,monospace',fontSize:14,theme:{background:'#101827',foreground:'#dce8f4',cursor:'#5ce0c1',selectionBackground:'#315873'}});
+const fit=new FitAddon.FitAddon();term.loadAddon(fit);term.open(document.getElementById('terminal'));fit.fit();term.focus();
+term.onData(data=>chrome.webview.postMessage({type:'input',data}));
+window.sendOutput=(s)=>term.write(s);
+window.addEventListener('resize',()=>{fit.fit();chrome.webview.postMessage({type:'resize',cols:term.cols,rows:term.rows});});
+chrome.webview.postMessage({type:'ready',cols:term.cols,rows:term.rows});
+</script></body></html>
